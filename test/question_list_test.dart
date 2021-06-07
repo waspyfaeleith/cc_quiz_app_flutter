@@ -34,10 +34,40 @@ void main() {
   });
 
   test('Can get next question number', () {
-    questionList.addQuestion(question1);
     questionList.addQuestion(question2);
     questionList.nextQuestion();
     expect(questionList.currentQuestionNumber(), 1);
+  });
+
+  test('Can get next question', () {
+    questionList.nextQuestion();
+    Question question = questionList.getQuestion();
+
+    expect(question, question2);
+  });
+
+  test('Quiz finished - false', () {
+    questionList.addQuestion(question2);
+    
+    expect(questionList.isFinished(), false);
+  });
+
+  test('Quiz finished - true', () {
+    questionList.nextQuestion();
+    questionList.nextQuestion();
+
+    expect(questionList.currentQuestionNumber(), 2);
+    expect(questionList.isFinished(), true);
+  });
+
+  test('Quiz - can reset question number to zero', () {
+    questionList.addQuestion(question1);
+    questionList.addQuestion(question2);
+    questionList.nextQuestion();
+    questionList.reset();
+
+
+    expect(questionList.currentQuestionNumber(), 0);
   });
 
 
