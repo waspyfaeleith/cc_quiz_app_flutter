@@ -48,7 +48,7 @@ void main() {
 
   test('Quiz finished - false', () {
     questionList.addQuestion(question2);
-    
+
     expect(questionList.isFinished(), false);
   });
 
