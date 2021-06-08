@@ -82,6 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            if (_questions.isFinished())
+              RoundedButton(
+                  title: "Try Quiz Again!",
+                  color: Colors.blueAccent,
+                  onPressed: () {
+                    _reset();
+                  }
+              ) else
             QuizView(
               // image: Container(
               //   width: 150,
@@ -93,8 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
               tagBackgroundColor: Colors.blue,
               tagColor: Colors.black,
               questionTag: "Question: ${_questions.currentQuestionNumber()+1}",
-              answerColor: Colors.white,
-              answerBackgroundColor: Color.fromARGB(255, 255, 0, 111),
+              answerColor: Colors.black54,
+              answerBackgroundColor: Colors.white,
               questionColor: Colors.white,
               backgroundColor: Colors.blue,
               width: 600,
@@ -115,15 +123,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: Text('Score: $_score'),
             ),
-            if (_questions.isFinished())
-              RoundedButton(
-                title: "Try Quiz Again!",
-                color: Colors.blueAccent,
-                onPressed: () {
-                  _reset();
-                }
-              )
-
 
           ],
         ),
