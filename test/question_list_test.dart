@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() {
 
   final question1 = Question('Which is the best programming language?', 'C', ['C++', 'Java', 'Python', 'JavaScript']);
-  final question2 = Question('Who won the F.A. Cup in 1958?', 'Bolton Wanderers', ['Mancheter United', 'Blackpool', 'Arsenal', 'Tottenham Hotspur']);
+  final question2 = Question('Who won the F.A. Cup in 1958?', 'Bolton Wanderers', ['Manchester United', 'Blackpool', 'Arsenal', 'Tottenham Hotspur']);
 
   QuestionList questionList = QuestionList("Misc");
 
