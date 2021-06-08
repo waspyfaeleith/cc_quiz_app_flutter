@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _currentQuestion = _questions.getQuestion();
       _score = 0;
+      _quizComplete = false;
     });
 
   }
@@ -119,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ] else ...[
               Text(
-                "You scored $_score",
+                "You scored $_score out of ${_questions.numberOfQuestions()}",
                 style: TextStyle(
                   fontSize: 25,
                 ),
