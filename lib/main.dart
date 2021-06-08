@@ -45,21 +45,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _score = 0;
   Question _currentQuestion = _questions.getQuestion();
+  bool _quizComplete = false;
 
   void _getNextQuestion() {
-    setState(() {
-      if (_questions.isFinished() == false) {
-        _questions.nextQuestion();
+    if (_questions.isFinished() == false) {
+      _questions.nextQuestion();
+      setState(() {
         _currentQuestion = _questions.getQuestion();
-      } else {
-
-      }
-    });
+      });
+    } else {
+      setState(() {
+        _quizComplete = true;
+      });
+    }
   }
 
   void _reset() {
+    _questions.reset();
     setState(() {
-      _questions.reset();
       _currentQuestion = _questions.getQuestion();
       _score = 0;
     });
@@ -82,48 +85,53 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            if (_questions.isFinished())
+            if (_quizComplete == false) ...[
+              QuizView(
+                showCorrect: false,
+                tagBackgroundColor: Colors.blue,
+                tagColor: Colors.black,
+                questionTag: "Question: ${_questions.currentQuestionNumber()+1}",
+                answerColor: Colors.black54,
+                answerBackgroundColor: Colors.white,
+                questionColor: Colors.white,
+                backgroundColor: Colors.blue,
+                width: 600,
+                height: 600,
+                question: _currentQuestion.questionText,
+                rightAnswer: _currentQuestion.rightAnswer,
+                wrongAnswers: _currentQuestion.wrongAnswers,
+                onRightAnswer: () => {
+                  print("Right"),
+                  _incrementScore(),
+                  _getNextQuestion(),
+                },
+                onWrongAnswer: () => {
+                  print("Wrong"),
+                  _getNextQuestion(),
+                },
+              ),
+              Container(
+                child: Text('Score: $_score',
+                  style: TextStyle(
+                    fontSize: 25,
+                ),
+                ),
+              ),
+            ] else ...[
+              Text(
+                "You scored $_score",
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
               RoundedButton(
                   title: "Try Quiz Again!",
                   color: Colors.blueAccent,
                   onPressed: () {
                     _reset();
                   }
-              ) else
-            QuizView(
-              // image: Container(
-              //   width: 150,
-              //   height: 150,
-              //   child: Image.network(
-              //       "https://yt3.ggpht.com/a/AATXAJyPMywRmD62sfK-1CXjwF0YkvrvnmaaHzs4uw=s900-c-k-c0xffffffff-no-rj-mo"),
-              // ),
-              showCorrect: false,
-              tagBackgroundColor: Colors.blue,
-              tagColor: Colors.black,
-              questionTag: "Question: ${_questions.currentQuestionNumber()+1}",
-              answerColor: Colors.black54,
-              answerBackgroundColor: Colors.white,
-              questionColor: Colors.white,
-              backgroundColor: Colors.blue,
-              width: 600,
-              height: 600,
-              question: _currentQuestion.questionText,
-              rightAnswer: _currentQuestion.rightAnswer,
-              wrongAnswers: _currentQuestion.wrongAnswers,
-              onRightAnswer: () => {
-                print("Right"),
-                _incrementScore(),
-                _getNextQuestion(),
-              },
-              onWrongAnswer: () => {
-                print("Wrong"),
-                _getNextQuestion(),
-              },
-            ),
-            Container(
-              child: Text('Score: $_score'),
-            ),
-
+              ),
+            ]
           ],
         ),
       ),
