@@ -1,7 +1,21 @@
+import 'package:cc_quiz_app/models/question.dart';
 import 'package:flutter/material.dart';
+import 'package:cc_quiz_app/data/question_data.dart';
 import 'package:quiz_view/quiz_view.dart';
 
+import 'models/question_list.dart';
+
+QuestionList _questions = QuestionList("Basics");
+
+void populateQuestionList() {
+  //_questions = QuestionList("Basics");
+  for (Question question in basicQuestions) {
+    _questions.addQuestion(question);
+  }
+}
+
 void main() {
+  populateQuestionList();
   runApp(MyApp());
 }
 
@@ -30,6 +44,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _score = 0;
+  Question _currentQuestion = _questions.getQuestion();
+
+  void _getNextQuestion() {
+    setState(() {
+      if (_questions.isFinished() == false) {
+        _questions.nextQuestion();
+        _currentQuestion = _questions.getQuestion();
+      }
+
+    });
+  }
 
   void _incrementScore() {
     setState(() {
@@ -54,24 +79,29 @@ class _MyHomePageState extends State<MyHomePage> {
               //   child: Image.network(
               //       "https://yt3.ggpht.com/a/AATXAJyPMywRmD62sfK-1CXjwF0YkvrvnmaaHzs4uw=s900-c-k-c0xffffffff-no-rj-mo"),
               // ),
-              showCorrect: true,
+              showCorrect: false,
               tagBackgroundColor: Colors.blue,
               tagColor: Colors.black,
-              questionTag: "Question: 1",
+              questionTag: "Question: ${_questions.currentQuestionNumber()+1}",
               answerColor: Colors.white,
               answerBackgroundColor: Color.fromARGB(255, 255, 0, 111),
               questionColor: Colors.white,
               backgroundColor: Colors.blue,//Color.fromARGB(255, 111, 0, 255),
               width: 300,
               height: 600,
-              question: "Which is the best programming language?",
-              rightAnswer: "C",
-              wrongAnswers: ["C++", "Java", "Python", "JavaScript"],
+              question: _currentQuestion.questionText,
+              rightAnswer: _currentQuestion.rightAnswer,
+              wrongAnswers: _currentQuestion.wrongAnswers,
               onRightAnswer: () => {
                 print("Right"),
-                setState(() { _score++; })
+                //setState(() { _score++; })
+                _incrementScore(),
+                _getNextQuestion(),
               },
-              onWrongAnswer: () => print("Wrong"),
+              onWrongAnswer: () => {
+                print("Wrong"),
+                _getNextQuestion(),
+              },
             ),
             Container(
               child: Text('Score: $_score'),
