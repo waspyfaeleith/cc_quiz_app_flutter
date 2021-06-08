@@ -1,3 +1,4 @@
+import 'package:cc_quiz_app/components/rounded_button.dart';
 import 'package:cc_quiz_app/models/question.dart';
 import 'package:flutter/material.dart';
 import 'package:cc_quiz_app/data/question_data.dart';
@@ -35,7 +36,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
 
-
   final String title;
 
   @override
@@ -51,9 +51,19 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_questions.isFinished() == false) {
         _questions.nextQuestion();
         _currentQuestion = _questions.getQuestion();
-      }
+      } else {
 
+      }
     });
+  }
+
+  void _reset() {
+    setState(() {
+      _questions.reset();
+      _currentQuestion = _questions.getQuestion();
+      _score = 0;
+    });
+
   }
 
   void _incrementScore() {
@@ -86,15 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
               answerColor: Colors.white,
               answerBackgroundColor: Color.fromARGB(255, 255, 0, 111),
               questionColor: Colors.white,
-              backgroundColor: Colors.blue,//Color.fromARGB(255, 111, 0, 255),
-              width: 300,
+              backgroundColor: Colors.blue,
+              width: 600,
               height: 600,
               question: _currentQuestion.questionText,
               rightAnswer: _currentQuestion.rightAnswer,
               wrongAnswers: _currentQuestion.wrongAnswers,
               onRightAnswer: () => {
                 print("Right"),
-                //setState(() { _score++; })
                 _incrementScore(),
                 _getNextQuestion(),
               },
@@ -106,6 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: Text('Score: $_score'),
             ),
+            if (_questions.isFinished())
+              RoundedButton(
+                title: "Try Quiz Again!",
+                color: Colors.blueAccent,
+                onPressed: () {
+                  _reset();
+                }
+              )
+
 
           ],
         ),
