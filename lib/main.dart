@@ -112,11 +112,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _reset() {
     _questions.reset();
-    _setUpOptions();
     setState(() {
       _currentQuestion = _questions.getQuestion();
       _score = 0;
       _quizComplete = false;
+      _setUpOptions();
     });
 
   }
