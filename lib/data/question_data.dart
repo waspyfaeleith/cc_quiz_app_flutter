@@ -106,6 +106,19 @@ final question10 = Question('How do you use an installed package in your code ?'
     }
 );
 
-List<Question> basicQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+final question11 = Question('What are the three A’s of testing ?',
+    ['a', 'c', 'g'],
+    {
+      'a': 'Arrange',
+      'b': 'Apology',
+      'c': 'Act',
+      'd': 'Analyse',
+      'e': 'Aggravate',
+      'f': 'Apply',
+      'g': 'Assert'
+    }
+);
+
+List<Question> basicQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11];
 
 
