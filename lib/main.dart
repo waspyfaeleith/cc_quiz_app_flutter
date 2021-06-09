@@ -1,5 +1,6 @@
 import 'package:cc_quiz_app/components/rounded_button.dart';
 import 'package:cc_quiz_app/models/question.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cc_quiz_app/data/question_data.dart';
 import 'package:flutter/widgets.dart';
@@ -57,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _setUpOptions() {
-    int optionNumber = 1;
     optionsList = [];
     for (String key  in _currentQuestion.answers.keys){
       optionsList.add({"key": key, "value": _currentQuestion.answers[key]});
@@ -105,6 +105,21 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _quizComplete = true;
       });
+    }
+  }
+
+  void _checkSubmittedAnswers() {
+    List<String> submittedAnswers = [];
+    for(int index in controller.selectedIndexes) {
+      submittedAnswers.add(optionsList[index]["key"]);
+    }
+    submittedAnswers.sort();
+    print(submittedAnswers);
+    if (listEquals(_currentQuestion.correctAnswerKeys, submittedAnswers)) {
+      print("correct :-)");
+      _incrementScore();
+    } else {
+      print("wrong :-(");
     }
   }
 
@@ -160,7 +175,11 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (_quizComplete == false) ...[
-                  Text("${_currentQuestion.questionText}"),
+                  Text("${_currentQuestion.questionText}",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                    ),
                   ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
@@ -177,8 +196,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: Container(
                         child: ListTile(
-                          title: new Text(" Title ${optionsList[index]['key']}"),
-                          subtitle: new Text("Description ${optionsList[index]['value']}"),
+                          title: new Text("${optionsList[index]['key']}: ${optionsList[index]['value']}"),
+                          //subtitle: new Text("${optionsList[index]['value']}"),
                         ),
                         decoration: controller.isSelected(index)
                             ? new BoxDecoration(color: Colors.blue[300])
@@ -192,6 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     title: "Submit Answer",
                     color: Colors.blueAccent,
                     onPressed: () {
+                           _checkSubmittedAnswers();
                           _getNextQuestion();
                     },
                   ),
