@@ -1,11 +1,11 @@
 class Question {
   String questionText = '';
-  List<int> correctAnswerIndices = [];
-  List<String> answers = [];
+  List<String> correctAnswerKeys = [];
+  var answers;
 
-  Question(String questionText, List<int> correctAnswerIndices, List<String> answers) {
+  Question(String questionText, List<String> correctAnswerKeys, var answers) {
     this.questionText = questionText;
+    this.correctAnswerKeys = correctAnswerKeys;
     this.answers = answers;
-    this.correctAnswerIndices = correctAnswerIndices;
   }
 }
