@@ -20,7 +20,6 @@ void main() {
     Question question2 = Question("Who are characters in `Still Game`?", [1, 3], ["Rab C. Nesbitt", "Jack Jarvis", "Ella Cotter", "Victor McDade"]);
     expect(question2.correctAnswerIndices.length, 2);
     expect(question2.correctAnswerIndices, [1,3]);
-
   });
 
 }
