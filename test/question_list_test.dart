@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 
 void main() {
 
-  final question1 = Question('Which is the best programming language?', 'C', ['C++', 'Java', 'Python', 'JavaScript']);
-  final question2 = Question('Who won the F.A. Cup in 1958?', 'Bolton Wanderers', ['Manchester United', 'Blackpool', 'Arsenal', 'Tottenham Hotspur']);
-
+  final question1 = Question('Which is the best programming language?', ['b'], {'a': 'C++', 'b': 'C', 'c': 'Java', 'd': 'Python', 'e': 'JavaScript'});
+  final question2 = Question("Who are characters in `Still Game`?", ['b', 'd'], {'a': 'Rab C. Nesbitt', 'b': 'Jack Jarvis', 'c': 'Ella Cotter', 'd': 'Victor McDade'});
   QuestionList questionList = QuestionList("Misc");
 
   test('Question list should have a module name', () {
@@ -29,8 +28,8 @@ void main() {
   test('Can get question from list', () {
     Question question = questionList.getQuestion();
     expect(question.questionText, 'Which is the best programming language?');
-    expect(question.rightAnswer, 'C');
-    expect(question.wrongAnswers, ['C++', 'Java', 'Python', 'JavaScript']);
+    expect(question.correctAnswerKeys, ['b']);
+    expect(question.answers, {'a': 'C++', 'b': 'C', 'c': 'Java', 'd': 'Python', 'e': 'JavaScript'});
   });
 
   test('Can get next question number', () {
