@@ -175,11 +175,17 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (_quizComplete == false) ...[
-                  Text("${_currentQuestion.questionText}",
+                  Text("${_currentQuestion.questionText} ",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                     ),
+                  Text(
+                    "(${_currentQuestion.correctAnswerKeys.length} correct answer(s))",
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal),
+                  ),
                   ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
