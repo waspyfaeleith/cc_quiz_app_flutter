@@ -168,9 +168,11 @@ class _MyHomePageState extends State<MyHomePage> {
           )
           ] : [],
         ),
+
         body: Center(
           child: Container(
             height: 600.0,
+            width: 500.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -187,23 +189,27 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontWeight: FontWeight.normal),
                   ),
                   ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                itemCount: optionsList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: MultiSelectItem(
-                      isSelecting: controller.isSelecting,
-                      onSelected: () {
-                        setState(() {
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: optionsList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {},
+                        child: MultiSelectItem(
+                        isSelecting: controller.isSelecting,
+                        onSelected: () {
+                        setState( () {
                           controller.toggle(index);
                         });
                       },
                       child: Container(
-                        child: ListTile(
-                          title: new Text("${optionsList[index]['key']}: ${optionsList[index]['value']}"),
-                          //subtitle: new Text("${optionsList[index]['value']}"),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ListTile(
+                              title: new Text("${optionsList[index]['key']}: ${optionsList[index]['value']}"),
+                            ),
+                          ],
                         ),
                         decoration: controller.isSelected(index)
                             ? new BoxDecoration(color: Colors.blue[300])

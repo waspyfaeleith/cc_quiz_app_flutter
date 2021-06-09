@@ -20,12 +20,12 @@ final question1 = Question('What are the naming conventions in Python for variab
     }
 );
 
-final question2 = Question('In Python what is the difference between is and == ?',
+final question2 = Question('In Python what is the difference between `is` and == ?',
     ['b'],
     {
       'a': 'Nothing, they both do the same thing',
-      'b': 'is defines if both the variables point to the same object in memory, whereas the == sign checks if the values for the two variables are the same',
-      'c': '== operator defines if both the variables point to the same object whereas the is sign checks if the values for the two variables are the same'
+      'b': '`is` defines if both the variables point to the same object in memory, whereas the == sign checks if the values for the two variables are the same',
+      'c': '== operator defines if both the variables point to the same object whereas the `is` sign checks if the values for the two variables are the same'
     }
 );
 
