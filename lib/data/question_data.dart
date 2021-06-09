@@ -19,6 +19,7 @@ final question1 = Question('What are the naming conventions in Python for variab
       'c': 'Pascal case (PascalCase)'
     }
 );
+
 final question2 = Question('In Python what is the difference between is and == ?',
     ['b'],
     {
@@ -27,6 +28,7 @@ final question2 = Question('In Python what is the difference between is and == ?
       'c': '== operator defines if both the variables point to the same object whereas the is sign checks if the values for the two variables are the same'
     }
 );
+
 final question3 = Question('What do we mean by conditional logic ?',
     ['b'],
     {
@@ -35,6 +37,7 @@ final question3 = Question('What do we mean by conditional logic ?',
       'c': 'When our project is dependent on other libraries to allow it to work'
     }
 );
+
 final question4 = Question('How do we check equality ?',
     ['a'],
     {
@@ -83,7 +86,7 @@ final question8 = Question('Which package manager did we use with Python? ',
     }
 );
 
-final question19 = Question('How do you install a Python package using the package manager ?',
+final question9 = Question('How do you install a Python package using the package manager ?',
     ['b'],
     {
       'a': 'pip install',
@@ -92,6 +95,7 @@ final question19 = Question('How do you install a Python package using the packa
       'd': 'python3 install',
     }
 );
+
 final question10 = Question('How do you use an installed package in your code ?',
     ['a'],
     {

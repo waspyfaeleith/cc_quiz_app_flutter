@@ -59,10 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _setUpOptions() {
     int optionNumber = 1;
     optionsList = [];
-    _currentQuestion.wrongAnswers.shuffle();
-    for (String answer in _currentQuestion.wrongAnswers){
-      optionsList.add({"key": "$optionNumber", "value": answer});
-      optionNumber++;
+    for (String key  in _currentQuestion.answers.keys){
+      optionsList.add({"key": key, "value": _currentQuestion.answers[key]});
     }
 
     controller.disableEditingWhenNoneSelected = true;
