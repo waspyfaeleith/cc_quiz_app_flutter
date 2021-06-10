@@ -8,7 +8,7 @@ import 'package:multi_select_item/multi_select_item.dart';
 
 import 'models/question_list.dart';
 
-QuestionList _questions = QuestionList("Basics");
+QuestionList _questions = QuestionList("Module 1", "Python Fundamentals");
 
 void populateQuestionList() {
   //_questions = QuestionList("Basics");
@@ -198,9 +198,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: MultiSelectItem(
                         isSelecting: controller.isSelecting,
                         onSelected: () {
-                        setState( () {
-                          controller.toggle(index);
-                        });
+                          setState( () {
+                            controller.toggle(index);
+                          });
                       },
                       child: Container(
                         child: Column(
@@ -246,43 +246,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-        // body: Center(
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: <Widget>[
-        //       if (_quizComplete == false) ...[
-        //         RoundedButton(
-        //             title: "Submit Answer",
-        //             color: Colors.blueAccent,
-        //             onPressed: () {
-        //               _getNextQuestion();
-        //             }
-        //         ),
-        //         Container(
-        //           child: Text('Score: $_score',
-        //             style: TextStyle(
-        //               fontSize: 25,
-        //           ),
-        //           ),
-        //         ),
-        //       ] else ...[
-        //         Text(
-        //           "You scored $_score out of ${_questions.numberOfQuestions()}",
-        //           style: TextStyle(
-        //             fontSize: 25,
-        //           ),
-        //         ),
-        //         RoundedButton(
-        //             title: "Try Quiz Again!",
-        //             color: Colors.blueAccent,
-        //             onPressed: () {
-        //               _reset();
-        //             }
-        //         ),
-        //       ]
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

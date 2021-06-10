@@ -6,10 +6,14 @@ void main() {
 
   final question1 = Question('Which is the best programming language?', ['b'], {'a': 'C++', 'b': 'C', 'c': 'Java', 'd': 'Python', 'e': 'JavaScript'});
   final question2 = Question("Who are characters in `Still Game`?", ['b', 'd'], {'a': 'Rab C. Nesbitt', 'b': 'Jack Jarvis', 'c': 'Ella Cotter', 'd': 'Victor McDade'});
-  QuestionList questionList = QuestionList("Misc");
+  QuestionList questionList = QuestionList("Misc", "Fun Questions");
 
   test('Question list should have a module name', () {
     expect(questionList.moduleName, 'Misc');
+  });
+
+  test('Question list should have a topic', () {
+    expect(questionList.topic, 'Fun Questions');
   });
 
   test('Question number should start at 0', () {

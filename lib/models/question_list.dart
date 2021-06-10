@@ -4,10 +4,12 @@ class QuestionList{
   int _questionNumber = 0;
 
   String moduleName = '';
+  String topic = '';
   List<Question> _questions = [];
 
-  QuestionList(String moduleName) {
+  QuestionList(String moduleName, String topic) {
     this.moduleName = moduleName;
+    this.topic = topic;
   }
 
   addQuestion(Question question) {
